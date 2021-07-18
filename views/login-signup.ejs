@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<htmk>
+    <head>
+        <title> Log In </title>
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    </head>
+    <style>
+    * {
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    body {
+        margin: 0;
+        font-family: sans-serif;
+    }
+    a {
+        color: #666;
+        font-size: 14px;
+        display: block;
+    }
+    .title {
+        text-align: center;
+    }
+    #page {
+        display: flex;
+    }
+    .notice {
+        font-size: 13px;
+        text-align: center;
+        color: #666;
+    }
+    .signup,
+    .login {
+        width: 30%;
+        height: 100vh;
+        background: #FFF;
+        padding-left: 70px;
+        padding-right: 70px;
+        display: table;
+    }
+    .signup {
+        display: none;
+    }
+    .signup a,
+    .login a {
+        margin-top: 25px;
+        text-align: center;
+    }
+    .form-signup,
+    .form-login {
+        align-items: center;
+        align-content: center;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .form-signup label,
+    .form-login label {
+        text-align: left;
+        font-size: 13px;
+        margin-top: 10px;
+        margin-left: 20px;
+        display: block;
+        color: #666;
+    }
+    .signup-input-firstname,
+    .signup-input-lastname,
+    .input-username,
+    .signup-input-email,
+    .signup-input-password,
+    .login-input-email,
+    .login-input-password {
+        width: 100%;
+        background: #DDD;
+        border-radius: 25px;
+        margin: 4px 0 10px 0;
+        padding: 10px;
+        display: flex;
+    }
+    .icon {
+        padding: 4px;
+        color: #666;
+        min-width: 30px;
+        text-align: center;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        border: 0;
+        background: none;
+        font-size: 16px;
+        padding: 4px 0;
+        outline: none;
+    }
+    button[type="submit"] {
+        width: 100%;
+        border: 0;
+        border-radius: 25px;
+        padding: 14px;
+        background: #50a5b8;
+        color: #FFF;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+        transition: ease all 0.3s;
+    }
+    button[type="submit"]:hover {
+        opacity: 0.9;
+    }
+    .background {
+        width: 70%;
+        padding: 40px;
+        height: 100vh;
+        background: linear-gradient(60deg, rgb(228, 135, 197), rgba(148, 223, 240, 0.7)), url('https://cdn.pixabay.com/photo/2016/03/09/09/22/workplace-1245776_960_720.jpg') center no-repeat;
+        background-size: cover;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: flex-end;
+        align-content: center;
+        flex-direction: row;
+    }
+    .background h1 {
+        max-width: 430px;
+        color: #FFF;
+        text-align: right;
+        font-family: 'Abel', sans-serif;
+        font-size: 50px;
+        padding: 0 ;
+        margin: 0;
+    }
+    .background p {
+        max-width: 650px;
+        color: #1a1a1a;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: 'Abel', sans-serif;
+        text-align: right;
+        padding: 0;
+        margin: 15px 0 0 0;
+    }
+    .account-button {
+        width: 100%;
+        border: 0;
+        border-radius: 25px;
+        padding: 14px;
+        background-color: #E28EF3;
+        color: #FFF;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 10px;
+        transition: ease all 0.3s;
+    }
+    #signupbutton:hover {
+        opacity: 0.9;
+    }
+    #bubbles { 
+        height: 100%;
+        padding: 100px 0;
+    }
+    .bubble {
+        visibility: hidden;
+        width: 60px;
+        height: 60px;
+        border-radius: 200px;
+        -moz-border-radius: 200px;
+        -webkit-border-radius: 200px;
+        position: absolute;
+    }
+    .x1 {
+        -webkit-transform: scale(0.9);
+        -moz-transform: scale(0.9);
+        transform: scale(0.9);
+        opacity: 0.2;
+        -webkit-animation: moveclouds 15s linear infinite, sideWays 4s ease-in-out infinite alternate;
+        -moz-animation: moveclouds 15s linear infinite;
+        -o-animation: moveclouds 15s linear infinite;
+    }
+    .x2 {
+        -webkit-transform: scale(0.6);
+        -moz-transform: scale(0.6);
+        transform: scale(0.6);
+        opacity: 0.5;
+        -webkit-animation: moveclouds 25s linear infinite, sideWays 5s ease-in-out infinite alternate;
+        -moz-animation: moveclouds 25s linear infinite;
+        -o-animation: moveclouds 25s linear infinite;
+    }
+    .x3 {
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        transform: scale(0.8);
+        opacity: 0.3;
+        -webkit-animation: moveclouds 20s linear infinite, sideWays 4s ease-in-out infinite alternate;
+        -moz-animation: moveclouds 20s linear infinite;
+        -o-animation: moveclouds 20s linear infinite;
+    }
+    .x4 {
+        -webkit-transform: scale(0.75);
+        -moz-transform: scale(0.75);
+        transform: scale(0.75);
+        opacity: 0.35;
+        -webkit-animation: moveclouds 18s linear infinite, sideWays 2s ease-in-out infinite alternate;
+        -moz-animation: moveclouds 18s linear infinite;
+        -o-animation: moveclouds 18s linear infinite;
+    }
+    .x5 {
+        -webkit-transform: scale(0.8);
+        -moz-transform: scale(0.8);
+        transform: scale(0.8);
+        opacity: 0.3; 
+        -webkit-animation: moveclouds 7s linear infinite, sideWays 1s ease-in-out infinite alternate;
+        -moz-animation: moveclouds 7s linear infinite;
+        -o-animation: moveclouds 7s linear infinite;
+    }
+    @-webkit-keyframes moveclouds { 
+        0% { 
+            top: 100vh;
+        }
+        100% { 
+            top: -500px;
+        }
+    }
+    @-webkit-keyframes sideWays { 
+        0% { 
+            margin-left: 0px;
+        }
+        100% { 
+            margin-left: 50px;
+        }
+    }
+    @-moz-keyframes moveclouds {     
+        0% { 
+            top: 100vh;
+        }
+
+        100% { 
+            top: -500px;
+        }
+    }
+    @-o-keyframes moveclouds {
+        0% { 
+            top: 100vh;
+        }
+        100% { 
+            top: -500px;
+        }
+    }
+
+    .ball {
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        background: radial-gradient(circle at bottom, #81e8f6, #76deef 10%, #055194 80%, #062745 100%);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -30px;
+        margin-top: -30px;
+    }
+
+    .ball:before {
+        content: "";
+        position: absolute;
+        top: 1%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
+        border-radius: 100%;
+        background: radial-gradient(circle at top, white, rgba(255, 255, 255, 0) 58%);
+        -webkit-filter: blur(5px);
+        filter: blur(5px);
+        z-index: 2;
+    }
+
+    .ball:after {
+        content: "";
+        position: absolute;
+        display: none;
+        top: 5%;
+        left: 10%;
+        width: 80%;
+        height: 80%;
+        border-radius: 100%;
+        -webkit-filter: blur(1px);
+        filter: blur(1px);
+        z-index: 2;
+        -webkit-transform: rotateZ(-30deg);
+        transform: rotateZ(-30deg);
+    }
+
+    .ball.shadow {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
+        -webkit-transform: rotateX(90deg) translateZ(-160px);
+        transform: rotateX(90deg) translateZ(-160px);
+        z-index: 1;
+    }
+
+    .ball.plain {
+        background: black;
+    }
+
+    .ball.plain:before, .ball.plain:after {
+        display: none;
+    }
+
+    .ball.bubble-texture {
+        background: radial-gradient(circle at 50% 55%, rgba(57, 247, 231, 0.349),  rgba(27, 187, 235, 0.288) 60%, rgba(87, 156, 236, 0.336) 40%, rgba(115, 117, 114, 0.4));
+        /* -webkit-animation: bubble-anim 2s ease-out infinite;
+        animation: bubble-anim 2s ease-out infinite; */
+    }
+    .ball.bubble-texture:before {
+        -webkit-filter: blur(0);
+        filter: blur(0);
+        height: 80%;
+        width: 40%;
+        background: radial-gradient(circle at 130% 130%, rgba(255, 255, 255, 0) 0, rgba(255, 255, 255, 0) 46%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0.8) 58%, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 0) 100%);
+        -webkit-transform: translateX(131%) translateY(58%) rotateZ(168deg) rotateX(10deg);
+        transform: translateX(131%) translateY(58%) rotateZ(168deg) rotateX(10deg);
+    }
+    .ball.bubble-texture:after {
+        display: block;
+        background: radial-gradient(circle at 50% 80%, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 74%, white 80%, white 84%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    body {
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(60deg, rgb(228, 135, 197), rgba(148, 223, 240, 0.7)), url('https://cdn.pixabay.com/photo/2016/03/09/09/22/workplace-1245776_960_720.jpg') center no-repeat;
+        background-repeat: no-repeat;
+        overflow: hidden;
+    }
+
+    /* @-webkit-keyframes bubble-anim {
+        0% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        20% {
+            -webkit-transform: scaleY(0.95) scaleX(1.05);
+            transform: scaleY(0.95) scaleX(1.05);
+        }
+        48% {
+            -webkit-transform: scaleY(1.1) scaleX(0.9);
+            transform: scaleY(1.1) scaleX(0.9);
+        }
+        68% {
+            -webkit-transform: scaleY(0.98) scaleX(1.02);
+            transform: scaleY(0.98) scaleX(1.02);
+        }
+        80% {
+            -webkit-transform: scaleY(1.02) scaleX(0.98);
+            transform: scaleY(1.02) scaleX(0.98);
+        }
+        97%, 100% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+    }
+  
+    @keyframes bubble-anim {
+        0% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        20% {
+            -webkit-transform: scaleY(0.95) scaleX(1.05);
+            transform: scaleY(0.95) scaleX(1.05);
+        }
+        48% {
+            -webkit-transform: scaleY(1.1) scaleX(0.9);
+            transform: scaleY(1.1) scaleX(0.9);
+        }
+        68% {
+            -webkit-transform: scaleY(0.98) scaleX(1.02);
+            transform: scaleY(0.98) scaleX(1.02);
+        }
+        80% {
+            -webkit-transform: scaleY(1.02) scaleX(0.98);
+            transform: scaleY(1.02) scaleX(0.98);
+        }
+        97%, 100% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+    } */
+    </style>
+    <body>
+        <div id="page">
+
+            <div id="login-page" class="login">
+                <form class="form-login">
+                    <h2 class="title">Login</h2>
+                    <p class="notice">Please log in to access the system</p>
+
+                    <label for="login-email">E-mail</label>
+                    <div class="login-input-email">
+                        <i class="fas fa-envelope icon"></i>
+                        <input type="email" name="login-email" placeholder="Type your e-mail" required>
+                    </div>
+
+                    <label for="login-password">Password</label>
+                    <div class="login-input-password">
+                        <i class="fas fa-lock icon"></i>
+                        <input type="password" name="login-password" placeholder="Type your password" required>
+                    </div>
+
+                    <button type="submit"><i class="fas fa-door-open"></i> Login</button>
+                    <button class="account-button" id="create-account">New? Sign Up Now!</button>
+                    <a href="#">Forgot your password?</a>
+                </form>
+            </div>
+
+            <div id="signup-page" class="signup">
+                <form class="form-signup">
+                    <h2 class="title">Sign-Up</h2>
+                    <p class="notice">Please sign up to access the system</p>
+    
+                    <label for="signup-firstname">First Name</label>
+                    <div class="signup-input-firstname">
+                        <i class="fas fa-envelope icon"></i>
+                        <input type="text" name="signup-firstname" placeholder="Type your first name" required>
+                    </div>
+
+                    <label for="signup-lastname">Last Name</label>
+                    <div class="signup-input-lastname">
+                        <i class="fas fa-envelope icon"></i>
+                        <input type="text" name="signup-lastname" placeholder="Type your last name" required>
+                    </div>
+
+                    <label for="username">Username</label>
+                    <div class="input-username">
+                        <i class="fas fa-envelope icon"></i>
+                        <input type="text" name="username" placeholder="Type your username" required>
+                    </div>
+
+                    <label for="signup-email">E-mail</label>
+                    <div class="signup-input-email">
+                        <i class="fas fa-envelope icon"></i>
+                        <input type="email" name="signup-email" placeholder="Type your e-mail" required>
+                    </div>
+
+                    <label for="signup-password">Password</label>
+                    <div class="signup-input-password">
+                        <i class="fas fa-lock icon"></i>
+                        <input type="password" name="signup-password" placeholder="Type your password" required>
+                    </div>
+
+                    <button type="submit"><i class="fas fa-door-open"></i> Sign Up</button>
+                    <button class="account-button" id="have-account">Have An Account? Log In!</button>
+                </form>
+            </div>
+
+            <div class="background">
+                <h1>WELCOME TO SOAPCIAL!</h1><br>
+                <p>Soapcial is the bubbly social media.<br>
+                Here at Soapcial you can share your life and interests in a clean and easy way!
+                </p>
+            </div>  
+        </div>
+        <div id="bubbles">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+    </body>
+    <script>
+    const bubble = document.getElementsByClassName("bubble");
+
+    for (let i = 0; i < bubble.length; i++) {
+        bubbleFunc(i);
+    }
+
+    function bubbleFunc(i) {
+        setTimeout(function() {
+            bubble[i].style.visibility = "visible";
+            let location = Math.floor(Math.random() * 101);
+            bubble[i].style.left = location + "%";
+            let css = Math.floor(Math.random() * 5) + 1;
+            bubble[i].classList.add("x" + css);
+            bubble[i].classList.add("bubble-texture");
+            bubble[i].classList.add("ball");
+        }, 2000 * i);
+    }
+
+    const signup_button = document.getElementById("create-account")
+    const login_button = document.getElementById("have-account");
+    const signup_page = document.getElementById("signup-page");
+    const login_page = document.getElementById("login-page");
+
+    signup_button.onclick = function() {
+        login_page.style.display = "none";
+        signup_page.style.display = "table";
+        window.document.title = "Sign Up";
+    }
+
+    login_button.onclick = function() {
+        signup_page.style.display = "none";
+        login_page.style.display = "table";
+        window.document.title = "Log In";
+    }
+    </script>
+</html>
